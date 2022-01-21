@@ -183,17 +183,21 @@ PreparedStatement pst = null;
     }
     public void hapusData()
     {
-        try {
-            java.sql.Statement statSiswa = conn.createStatement();
-            String sql = "delete from siswa where no = '"+txtNo.getText()+"'";
-            statSiswa.executeUpdate(sql);
-            getData();
-            clear();
-            btnHapus.setEnabled(false);
-            btnUbah.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "Data berhasil di hapus");
-        } catch (Exception exc) {
-            System.err.println(exc.getMessage());
+        int tanya = JOptionPane.showConfirmDialog(null, "Yakin hapus data ini ?","Konfirmasi",JOptionPane.CANCEL_OPTION);
+        if(tanya == JOptionPane.OK_OPTION)
+        {
+                try {
+                java.sql.Statement statSiswa = conn.createStatement();
+                String sql = "delete from siswa where no = '"+txtNo.getText()+"'";
+                statSiswa.executeUpdate(sql);
+                getData();
+                clear();
+                btnHapus.setEnabled(false);
+                btnUbah.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "Data berhasil di hapus");
+            } catch (Exception exc) {
+                System.err.println(exc.getMessage());
+            }
         }
     }
     // DISINI TERDAPAT VALIDASI DARI SEMUA FORM //
