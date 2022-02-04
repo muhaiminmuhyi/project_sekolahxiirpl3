@@ -5,7 +5,13 @@
  */
 package form;
 
+import controller.koneksi;
+import java.io.File;
+import java.sql.Connection;
+import java.util.Locale;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -35,8 +41,8 @@ public class formHome extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         MnSiswa = new javax.swing.JMenu();
         MnPengguna = new javax.swing.JMenu();
-        mnLaporansiswa = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnLaporan = new javax.swing.JMenu();
+        mnLaporansiswa = new javax.swing.JMenuItem();
         mnLaporanpengguna = new javax.swing.JMenuItem();
         MnLogout = new javax.swing.JMenu();
 
@@ -94,20 +100,25 @@ public class formHome extends javax.swing.JFrame {
         });
         jMenuBar1.add(MnPengguna);
 
-        mnLaporansiswa.setText("Laporan");
+        mnLaporan.setText("Laporan");
 
-        jMenuItem1.setText("Laporan Siswa");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnLaporansiswa.setText("Laporan Siswa");
+        mnLaporansiswa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnLaporansiswaActionPerformed(evt);
             }
         });
-        mnLaporansiswa.add(jMenuItem1);
+        mnLaporan.add(mnLaporansiswa);
 
         mnLaporanpengguna.setText("Laporan Pengguna");
-        mnLaporansiswa.add(mnLaporanpengguna);
+        mnLaporanpengguna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnLaporanpenggunaActionPerformed(evt);
+            }
+        });
+        mnLaporan.add(mnLaporanpengguna);
 
-        jMenuBar1.add(mnLaporansiswa);
+        jMenuBar1.add(mnLaporan);
 
         MnLogout.setText("Logout");
         MnLogout.addMenuListener(new javax.swing.event.MenuListener() {
@@ -165,9 +176,27 @@ public class formHome extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_MnPenggunaMenuSelected
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void mnLaporansiswaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLaporansiswaActionPerformed
+        Connection conn = koneksi.getKoneksi();
+        File jasper = new File("src/Laporan/laporanSiswa.jasper");
+        try {
+            JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), null, conn);
+            JasperViewer.viewReport(jp, false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_mnLaporansiswaActionPerformed
+
+    private void mnLaporanpenggunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnLaporanpenggunaActionPerformed
+        Connection conn = koneksi.getKoneksi();
+        File jasper = new File("src/Laporan/laporanPengguna.jasper");
+        try {
+            JasperPrint jp = JasperFillManager.fillReport(jasper.getPath(), null, conn);
+            JasperViewer.viewReport(jp, false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_mnLaporanpenggunaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,9 +240,9 @@ public class formHome extends javax.swing.JFrame {
     private javax.swing.JLabel helloLabel;
     private javax.swing.JLabel homeLabel;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu mnLaporan;
     private javax.swing.JMenuItem mnLaporanpengguna;
-    private javax.swing.JMenu mnLaporansiswa;
+    private javax.swing.JMenuItem mnLaporansiswa;
     // End of variables declaration//GEN-END:variables
 }
