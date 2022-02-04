@@ -35,6 +35,9 @@ public class formHome extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         MnSiswa = new javax.swing.JMenu();
         MnPengguna = new javax.swing.JMenu();
+        mnLaporansiswa = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mnLaporanpengguna = new javax.swing.JMenuItem();
         MnLogout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,7 +83,31 @@ public class formHome extends javax.swing.JFrame {
         jMenuBar1.add(MnSiswa);
 
         MnPengguna.setText("Pengguna");
+        MnPengguna.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                MnPenggunaMenuSelected(evt);
+            }
+        });
         jMenuBar1.add(MnPengguna);
+
+        mnLaporansiswa.setText("Laporan");
+
+        jMenuItem1.setText("Laporan Siswa");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnLaporansiswa.add(jMenuItem1);
+
+        mnLaporanpengguna.setText("Laporan Pengguna");
+        mnLaporansiswa.add(mnLaporanpengguna);
+
+        jMenuBar1.add(mnLaporansiswa);
 
         MnLogout.setText("Logout");
         MnLogout.addMenuListener(new javax.swing.event.MenuListener() {
@@ -132,6 +159,16 @@ public class formHome extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_MnSiswaMenuSelected
 
+    private void MnPenggunaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_MnPenggunaMenuSelected
+        formPengguna fp = new formPengguna();
+        fp.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_MnPenggunaMenuSelected
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,6 +211,9 @@ public class formHome extends javax.swing.JFrame {
     private javax.swing.JLabel helloLabel;
     private javax.swing.JLabel homeLabel;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem mnLaporanpengguna;
+    private javax.swing.JMenu mnLaporansiswa;
     // End of variables declaration//GEN-END:variables
 }
